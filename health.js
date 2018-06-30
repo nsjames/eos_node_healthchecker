@@ -29,6 +29,7 @@ const checkCORS = async url => {
                 && response.headers._headers.hasOwnProperty('access-control-allow-origin')
                 && response.headers._headers['access-control-allow-origin'].length === 1
                 && response.headers._headers['access-control-allow-origin'].includes('*')
+                && !response.headers._headers['server'].includes('cloudflare')
         })
         .catch(() => false)
 };
@@ -131,9 +132,13 @@ const getNodes = async () => {
         resolver_timeout          10s;
     `
 
-    const SERVER_NAME = 'nodes.get-scatter.com';
-    const SSL_CERT="/etc/letsencrypt/live/nodes.get-scatter.com/fullchain.pem;";
-    const SSL_KEY="/etc/letsencrypt/live/nodes.get-scatter.com/privkey.pem;";
+    // const SERVER_NAME = 'nodes.get-scatter.com';
+    // const SSL_CERT="/etc/letsencrypt/live/nodes.get-scatter.com/fullchain.pem;";
+    // const SSL_KEY="/etc/letsencrypt/live/nodes.get-scatter.com/privkey.pem;";
+
+    const SERVER_NAME = 'nodes2.get-scatter.com';
+    const SSL_CERT="/etc/letsencrypt/live/nodes2.get-scatter.com/fullchain.pem;";
+    const SSL_KEY="/etc/letsencrypt/live/nodes2.get-scatter.com/privkey.pem;";
 
     serverBlock += `
 server {
@@ -147,7 +152,7 @@ server {
 }
 server {
     listen 443 ssl;
-    server_name $SERVER_NAME;
+    server_name ${SERVER_NAME};
     proxy_ssl_session_reuse on;
     ssl_certificate ${SSL_CERT}
     ssl_certificate_key ${SSL_KEY}
