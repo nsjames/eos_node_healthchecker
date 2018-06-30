@@ -149,8 +149,8 @@ server {
     listen 443 ssl;
     server_name $SERVER_NAME;
     proxy_ssl_session_reuse on;
-    ssl_certificate $SSL_CERT
-    ssl_certificate_key $SSL_KEY
+    ssl_certificate ${SSL_CERT}
+    ssl_certificate_key ${SSL_KEY}
     ssl_verify_client off;
     
     location / {
@@ -163,8 +163,8 @@ server {
 
     console.log(serverBlock)
 
-    // const SERVER_BLOCK_PATH="/etc/nginx/sites-available/default";
-    const SERVER_BLOCK_PATH="E:/test";
+    const SERVER_BLOCK_PATH="/etc/nginx/sites-available/default";
+    //const SERVER_BLOCK_PATH="E:/test";
     fs.writeFile(SERVER_BLOCK_PATH, serverBlock, function(err) {
         if(err) {
             return console.log(err);
