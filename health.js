@@ -29,7 +29,7 @@ const checkCORS = async url => {
                 && response.headers._headers.hasOwnProperty('access-control-allow-origin')
                 && response.headers._headers['access-control-allow-origin'].length === 1
                 && response.headers._headers['access-control-allow-origin'].includes('*')
-                && !response.headers._headers['server'].includes('cloudflare')
+                // && !response.headers._headers['server'].includes('cloudflare')
         })
         .catch(() => false)
 };
