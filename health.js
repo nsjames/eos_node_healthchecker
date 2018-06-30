@@ -23,8 +23,6 @@ const checkCORS = async url => {
         referrer: 'no-referrer',
     })
         .then(response => {
-            console.log('respo', response.headers);
-
             return response.headers.hasOwnProperty('_headers')
                 && response.headers._headers.hasOwnProperty('access-control-allow-origin')
                 && response.headers._headers['access-control-allow-origin'].length === 1
